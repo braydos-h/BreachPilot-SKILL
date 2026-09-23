@@ -2,7 +2,9 @@
 
 A backend-free `SKILL.md` package that transfers the **BreachPilot operating model** into Claude Code, OpenAI Codex, and other coding-agent CLIs that support Agent Skills or can load Markdown instructions.
 
-It contains no server, API, database, MCP dependency, sandbox manager, exploit backend, or persistent state. The skill teaches the agent to behave like the BreachPilot loop: **scope → observe → hypothesize → choose one high-value action → execute → classify → verify → adapt → report**.
+It contains no server, API, database, MCP dependency, sandbox manager, exploit backend, or persistent state. The skill teaches the agent to use BreachPilot's decision loop: **scope → observe → hypothesize → choose a useful check → classify evidence → verify → adapt → report**. It applies to live authorized assessments, source and artifact reviews, and focused finding verification.
+
+The skill is methodology, not a technical control. It cannot enforce a target allowlist, isolate a shell, or verify a result automatically. The agent uses the tools and safeguards actually present in its runtime.
 
 ## Package
 
@@ -71,14 +73,14 @@ If it does not support skills natively, keep the folder in the repository and ad
 | --- | --- |
 | target allowlist / scope gate | explicit scope ledger + preflight every target-touching action |
 | exploit-agent loop | observe → hypothesize → act → normalize → verify → adapt |
-| phase tracker | phase exit criteria in the skill |
+| phase tracker | phase questions and evidence-based stopping judgment |
 | assessment-state service | compact session facts/hypotheses maintained by the agent |
-| outcome judge | two-axis operational/evidential classification |
+| outcome judge | separate execution, hypothesis verdict, and demonstrated impact |
 | audit/evidence store | evidence references in the current session/report |
 | failure taxonomy | local failure classification + recovery matrix |
-| reflection/peer agents | periodic re-plan with current model/tools |
+| reflection/peer agents | concise re-plan when evidence or failures change the path |
 | runtime skill selector | progressive references loaded only when relevant |
-| backend memory | current-session context only; no claimed persistence |
+| backend memory | compact working state; task-local artifacts only when useful |
 | MCP tool catalog | discover/use only tools actually available in the CLI |
 
 ## Design notes
