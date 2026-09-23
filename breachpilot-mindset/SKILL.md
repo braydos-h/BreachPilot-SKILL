@@ -27,7 +27,7 @@ The user-supplied target or repository is the starting scope. Related hosts, red
 5. **Update:** Confirm, narrow, refute, or leave the hypothesis open. Re-rank branches and pick the next question. Classify failures before retrying.
 6. **Verify and stop:** Corroborate material claims through a different check when feasible. Stop when the goal has adequate proof, no useful authorized path remains, or the next step requires a missing prerequisite. Report the result and its limits.
 
-Use a short internal ledger such as `fact → evidence`, `hypothesis → test → verdict`, and `blocked path → prerequisite`. For long tasks, preserve that state in a user-approved or task-local artifact if useful; a file is not an audit system. See [operating-model.md](references/operating-model.md) for branch and phase decisions.
+Use a short internal ledger such as `fact → evidence`, `hypothesis → test → verdict`, and `blocked path → prerequisite`. For long tasks, preserve that state in a task-local artifact if useful; a file is not an audit system. See [operating-model.md](references/operating-model.md) for branch and phase decisions.
 
 ## Match the investigation to the task
 
