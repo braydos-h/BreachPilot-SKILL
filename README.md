@@ -2,7 +2,7 @@
 
 This repository packages a portable Agent Skill based on the investigation workflow behind [BreachPilot](https://github.com/braydos-h/BreachPilot). Use it with Claude Code, OpenAI Codex, or another coding-agent CLI that supports Agent Skills or can load Markdown instructions.
 
-The skill guides live, authorized security assessments, source and artifact reviews, and focused finding verification. It gives the agent a clear working loop: set scope, observe, form a hypothesis, choose a useful check, assess the evidence, verify, adapt, and report.
+The skill guides live, authorized security assessments, source and artifact reviews, and focused finding verification. The AI agent runs the workflow directly with its own reasoning and the capabilities native to its runtime; no BreachPilot backend, MCP server, or separate planner is required. It sets scope, observes, forms a hypothesis, chooses a useful check, assesses the evidence, verifies, adapts, and reports. When a live action is unavailable, it continues with available analysis and states the limitation.
 
 ## Package contents
 
@@ -83,11 +83,11 @@ The skill carries over the investigation method in a form that works without Bre
 | reflection/peer agents | concise re-plan when evidence or failures change the path |
 | runtime skill selector | progressive references loaded only when relevant |
 | backend memory | compact working state; task-local artifacts only when useful |
-| MCP tool catalog | discover/use only tools actually available in the CLI |
+| MCP tool catalog | use native runtime capabilities when available; MCP is optional |
 
 ## Limits
 
-This package provides methodology, not technical controls. It contains no server, API, database, MCP dependency, sandbox manager, exploit backend, or persistent state. It cannot enforce a target allowlist, isolate a shell, or verify results automatically. Those safeguards depend on the tools available in the agent's runtime.
+This package provides methodology, not technical controls. It contains no server, API, database, MCP dependency, sandbox manager, exploit backend, or persistent state, and none is needed to run the workflow. The agent reasons through the investigation and uses the local/runtime capabilities it already has. The skill cannot enforce a target allowlist, isolate a shell, or verify results automatically; those capabilities depend on the agent's runtime.
 
 ## Design notes
 

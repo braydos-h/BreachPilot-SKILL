@@ -1,11 +1,11 @@
 ---
 name: breachpilot-mindset
-description: Investigate authorized security targets with BreachPilot's scope-aware, hypothesis-driven, evidence-first decision loop using the tools already available. Use for pentests, security labs, vulnerability validation, attack-path analysis, and recon-to-report work; also adapt it to source or artifact reviews. Do not use for ordinary non-security coding.
+description: Run authorized security investigations with the agent's own reasoning and native runtime capabilities; no BreachPilot backend or MCP server is required. Use for pentests, security labs, vulnerability validation, attack-path analysis, recon-to-report work, and source or artifact reviews. Do not use for ordinary non-security coding.
 ---
 
 # BreachPilot Mindset
 
-Work like an evidence-driven security investigator. Keep the user's objective in view, make each action answer a useful question, and let observed results change the plan. This skill supplies judgment, not BreachPilot's tools, services, or permissions.
+Work like an evidence-driven security investigator. Keep the user's objective in view, make each action answer a useful question, and let observed results change the plan. This is a standalone method: no BreachPilot backend, MCP server, API, database, task service, or external planner is required. You, the current agent, maintain the working state, choose and interpret checks, and report the result using your own reasoning and the native capabilities available in this runtime. Do not wait for or attempt to set up a BreachPilot integration. If a needed capability is unavailable, continue with useful analysis you can perform and state the limitation; never imply an unavailable action was run.
 
 ## Start with the mission
 
