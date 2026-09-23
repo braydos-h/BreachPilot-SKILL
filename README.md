@@ -1,12 +1,12 @@
-# BreachPilot Mindset — Portable Agent Skill
+# BreachPilot mindset
 
-A backend-free `SKILL.md` package that transfers the **BreachPilot operating model** into Claude Code, OpenAI Codex, and other coding-agent CLIs that support Agent Skills or can load Markdown instructions.
+This repository packages a portable Agent Skill based on the investigation workflow behind [BreachPilot](https://github.com/braydos-h/BreachPilot). Use it with Claude Code, OpenAI Codex, or another coding-agent CLI that supports Agent Skills or can load Markdown instructions.
 
-It contains no server, API, database, MCP dependency, sandbox manager, exploit backend, or persistent state. The skill teaches the agent to use BreachPilot's decision loop: **scope → observe → hypothesize → choose a useful check → classify evidence → verify → adapt → report**. It applies to live authorized assessments, source and artifact reviews, and focused finding verification.
+The skill guides live, authorized security assessments, source and artifact reviews, and focused finding verification. It gives the agent a clear working loop: set scope, observe, form a hypothesis, choose a useful check, assess the evidence, verify, adapt, and report.
 
-The skill is methodology, not a technical control. It cannot enforce a target allowlist, isolate a shell, or verify a result automatically. The agent uses the tools and safeguards actually present in its runtime.
+## Package contents
 
-## Package
+The package includes the main skill, its supporting references, and instruction snippets for Claude Code and Codex.
 
 ```text
 breachpilot-mindset-skill/
@@ -59,15 +59,17 @@ mkdir -p ~/.agents/skills
 cp -R breachpilot-mindset ~/.agents/skills/breachpilot-mindset
 ```
 
-Codex can select the skill automatically from its `name`/`description`, or you can explicitly request `$breachpilot-mindset` where supported.
+Codex can select the skill from its `name` and `description`, or you can explicitly request `$breachpilot-mindset` where supported.
 
-## Generic coding-agent CLI
+## Other coding-agent CLIs
 
 If the CLI supports the open Agent Skills layout, install the `breachpilot-mindset/` directory in its skills directory unchanged.
 
-If it does not support skills natively, keep the folder in the repository and add the appropriate snippet from `adapters/` to your root agent-instructions file. The snippet tells the agent to read `breachpilot-mindset/SKILL.md` for authorized security tasks.
+If it loads Markdown instructions instead, keep the folder in the repository and add the appropriate snippet from `adapters/` to the root agent-instructions file. The snippet directs the agent to read `breachpilot-mindset/SKILL.md` for authorized security tasks.
 
-## What changed from BreachPilot
+## How the skill maps to BreachPilot
+
+The skill carries over the investigation method in a form that works without BreachPilot's backend:
 
 | BreachPilot backend concept | Standalone skill equivalent |
 | --- | --- |
@@ -83,8 +85,12 @@ If it does not support skills natively, keep the folder in the repository and ad
 | backend memory | compact working state; task-local artifacts only when useful |
 | MCP tool catalog | discover/use only tools actually available in the CLI |
 
+## Limits
+
+This package provides methodology, not technical controls. It contains no server, API, database, MCP dependency, sandbox manager, exploit backend, or persistent state. It cannot enforce a target allowlist, isolate a shell, or verify results automatically. Those safeguards depend on the tools available in the agent's runtime.
+
 ## Design notes
 
-The canonical `SKILL.md` intentionally uses only the portable `name` and `description` frontmatter fields. Vendor-specific fields are omitted so the same folder remains valid across Agent Skills implementations.
+The canonical `SKILL.md` uses only the portable `name` and `description` frontmatter fields. Vendor-specific fields are omitted so the same folder works across Agent Skills implementations.
 
-The main file stays focused on behavior; detailed rules live one reference level below it. That matches the progressive-disclosure pattern used by current Claude and Codex skill systems.
+The main file focuses on behavior. Detailed guidance lives in references one level below it, which agents can load when it applies to the task.
