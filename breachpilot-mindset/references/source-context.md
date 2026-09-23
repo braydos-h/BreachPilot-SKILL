@@ -1,48 +1,21 @@
 # BreachPilot Source Context
 
-This skill is a backend-free distillation of the operating ideas in `braydos-h/BreachPilot`, not a copy of its service architecture or attack-module catalog.
+This portable skill distills BreachPilot's operating model, not its implementation. The source repository supplied in `context/` includes a modern exploit agent (Flow A), a frozen database-backed research loop (Flow B), and supporting engineering docs. Some source documents describe different generations of the system; the common behavioral contract is the useful part to transfer.
 
-## Primary source areas reviewed
+## Ideas retained
 
-- `README.md` — project purpose, full assessment lifecycle, evidence-first verification, containment, autonomy model, reliability goals.
-- `CLAUDE.md` and `AGENTS.md` — architecture canon, permission/target-lock model, boot sequence, implementation invariants.
-- `docs/architecture.md` — separation of orchestration, tool routing, evidence, scope, outcome judgment, and reporting.
-- `docs/exploit-agent.md` — modern Flow A loop: plan, phase-narrowed action selection, execute, normalize outcome, reflect, re-plan, stop/report.
-- `tools/exploit_agent/prompt.py` — recon→enumeration→research→validation workflow, hypothesis protocol, one-primary-tool discipline, verification discipline, failure recovery, environment awareness.
-- `tools/exploit_agent/phase_tracker.py` — anti-premature-termination phase minima.
-- `tools/exploit_agent/outcome_truth.py` and `docs/outcome-evidence.md` — conservative outcome classification and separation of operational success from evidential truth.
-- `tools/exploit_agent/reflection.py` — periodic reflection and retry/branch adaptation.
-- `tools/mcp_tools/assessment_state.py` and capability-design docs — explicit assessment state, hypotheses, prerequisites, evidence references, and capability discovery.
-- `docs/skills.md` and `docs/skill-authoring.md` — skills are advisory context only and never expand scope/permission; progressive, context-relevant methodology selection.
-- `mission.yaml`, `docs/safety-model.md` — allowlist/exclusions, risk profiles, forbidden classes of action, fail-closed safety philosophy.
+| Source concept | Portable agent behavior |
+| --- | --- |
+| Operator goal and mission scope | Keep a goal, success condition, scope ledger, and action limits. |
+| Planner, task graph, capability prerequisites | Pick the next discriminating action and satisfy missing prerequisites first. |
+| Recon, enumeration, research, validation | Ask phase questions in an order suited to the task; avoid technique-first guesses. |
+| Observer, OutcomeJudge, outcome normalization | Separate execution, hypothesis verdict, and demonstrated impact. |
+| Evidence store and finding verifier | Keep reproducible evidence references and corroborate material claims. |
+| Failure taxonomy and reflection | Diagnose failures, change a real assumption, and stop duplicate loops. |
+| Report generator and reliability metrics | Value truthful, reproducible findings and sound stopping judgment over action or tool counts. |
 
-## Concepts preserved in the standalone skill
+The key references are `context/README.md`, `context/CLAUDE.md`, `context/AGENTS.md`, `context/docs/architecture.md`, `runtime-flows.md`, `exploit-agent.md`, `outcome-evidence.md`, `safety-model.md`, `skills.md`, `capability-upgrade-design.md`, `reliability-metrics.md`, and `context/tools/exploit_agent/prompt.py`, `phase_tracker.py`, and `outcome_truth.py`.
 
-1. target/scope locking as an invariant;
-2. recon-first phase discipline;
-3. falsifiable hypotheses before meaningful attack actions;
-4. capability discovery before assuming a tool exists;
-5. prerequisite-aware planning instead of brute-force retries;
-6. evidence-linked outcomes independent of command success;
-7. conservative compromise/finding classification;
-8. independent verification for high-impact claims;
-9. periodic reflection after failures/new evidence;
-10. explicit stop conditions and blocker reporting;
-11. skills/methodology never override authorization;
-12. reliability measured by reproducible truth, not tool count.
+## What does not transfer
 
-## Backend components intentionally omitted
-
-This package does not include or emulate:
-
-- MCP servers or tool registries;
-- databases, queues, run services, WebUI, or APIs;
-- Docker worker/sandbox/network firewall;
-- persistent attack memory or experience store;
-- credential vault;
-- multi-agent swarm/campaign scheduler;
-- report generator service;
-- target allowlist enforcement code;
-- custom exploit modules or payloads.
-
-Their behavioral intent is translated into instructions the current coding agent can follow with its own tools.
+No part of this skill implements BreachPilot's MCP servers, target allowlist, network firewall, Docker worker, policy engine, audit hash chain, database, credential vault, multi-agent scheduler, or verification oracle. The agent must use the current runtime's real tools and permissions. A prose scope check is useful discipline, but it is not a technical lock. The source's fixed phase counts, output markers, tool names, and lab-specific defaults are implementation details, not universal requirements for this skill.

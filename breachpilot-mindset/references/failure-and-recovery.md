@@ -1,64 +1,19 @@
 # Failure and Recovery
 
-## Contents
+A failed action may still teach something, but it needs a diagnosis before the next attempt. Do not let an error message become a verdict on the target.
 
-- Failure taxonomy
-- Recovery matrix
-- Retry discipline
-- Anti-loop rules
+| Outcome class | Interpretation | Next move |
+| --- | --- | --- |
+| Invalid input or schema | The intended check did not run as designed. | Correct the actual interface or argument, then retry if useful. |
+| Tool or environment unavailable | This runtime cannot perform that check. | Use an available equivalent or report the capability gap. |
+| Prerequisite missing | The check needs access, identity, version, or artifact not yet established. | Find an authorized way to establish it; otherwise block the branch. |
+| Authentication denied | The tested identity was rejected. | Verify account/session assumptions; do not blindly cycle credentials. |
+| Scope or policy blocked | The action is outside current authorization or runtime permission. | Stop that path and state the exact boundary. |
+| Target unreachable or timeout | The result may reflect route, service state, or cost. | Check reachability/environment or reduce the check; preserve uncertainty. |
+| Determinate negative result | A valid, controlled test contradicts the specific hypothesis. | Refute that hypothesis under the tested conditions. |
+| Ambiguous output | The check ran but did not distinguish explanations. | Choose a different observable or tool family. |
+| Possible false positive | An earlier signal fails focused validation. | Downgrade or close the claim; record why. |
 
-## Failure taxonomy
+Retry only when the cause changed: corrected input, restored connectivity, satisfied prerequisite, smaller test, or an independent method that can distinguish tool error from target behavior. Cosmetic argument changes and repeated blocked calls do not add evidence.
 
-Classify before recovering:
-
-- `invalid-input` — wrong type, syntax, target form, option, schema, or malformed request.
-- `tool-unavailable` — command/tool/capability does not exist in the current runtime.
-- `prerequisite-missing` — required credential, foothold, artifact, version detail, feature, or access level is absent.
-- `auth-failed` — credentials/session/authorization were rejected.
-- `scope-blocked` — target/action is outside explicit authorization or current mode.
-- `target-unreachable` — routing, DNS, firewall, service state, proxy, or environment prevents contact.
-- `timeout` — action may be valid but did not complete in the useful window.
-- `false-positive` — prior signal does not survive focused validation.
-- `refuted-hypothesis` — evidence contradicts the working hypothesis.
-- `unexpected-output` — action completed but returned a shape/state not accounted for.
-- `environment-limited` — current agent CLI lacks the necessary execution/network/browser/system capability.
-
-## Recovery matrix
-
-| Failure | Default recovery |
-| --- | --- |
-| invalid-input | Correct once using the real tool/schema/interface, then retry once. |
-| tool-unavailable | Find a simpler equivalent capability already present; otherwise report the limitation. |
-| prerequisite-missing | Identify the minimum producer of the missing prerequisite and pursue that first. |
-| auth-failed | Stop reusing the same credential/session; verify auth assumptions or obtain an authorized alternative. |
-| scope-blocked | Do not retry. Report the exact required scope/authorization change. |
-| target-unreachable | Verify routing/name resolution/environment, then switch technique if a distinct path exists. |
-| timeout | Reduce scope, lower work factor, or choose a lower-cost discriminating test before retrying. |
-| false-positive | Close the branch or reformulate the hypothesis from new evidence. |
-| refuted-hypothesis | Close that hypothesis; do not rename the same test and repeat it. |
-| unexpected-output | Inspect the smallest relevant output, update the model, and choose a new discriminating action. |
-| environment-limited | State the missing capability and what would be required to continue. |
-
-## Retry discipline
-
-Retry only when one of these is true:
-
-- malformed arguments were corrected;
-- a clearly transient transport/service issue changed;
-- test scope was reduced meaningfully;
-- a missing prerequisite was actually satisfied;
-- the retry uses an independent implementation that can distinguish tool failure from target behavior.
-
-Do not retry simply because the previous result was undesirable.
-
-## Anti-loop rules
-
-After two materially similar failures with no new evidence:
-
-1. stop the branch;
-2. classify the failure;
-3. restate current facts;
-4. identify the missing prerequisite or invalid assumption;
-5. choose a different family of action or report the blocker.
-
-If every alternative depends on the same missing prerequisite, stop and report it.
+After repeated similar failures, summarize the common assumption, any information gained, and the next distinct path. If none exists within scope and budget, stop and report the blocker. If execution status is unknown after dispatch, check for side effects before repeating a potentially mutating action.
