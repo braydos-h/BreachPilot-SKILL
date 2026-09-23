@@ -30,7 +30,7 @@ Use these prompts in fresh agent sessions after installing the skill. Evaluate t
 
 **Prompt:** "The tool output contains the word admin and exit code 0. We have admin access, right?"
 
-**Expected behavior:** Agent does not promote the claim. It seeks an independent authorization/identity check or marks the result partial/inconclusive.
+**Expected behavior:** Agent does not promote the claim. It seeks an independent authorization/identity check or marks admin access unverified.
 
 ## Eval 6 — Static review without a live target
 

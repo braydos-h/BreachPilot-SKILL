@@ -14,7 +14,7 @@ This portable skill distills BreachPilot's operating model, not its implementati
 | Failure taxonomy and reflection | Diagnose failures, change a real assumption, and stop duplicate loops. |
 | Report generator and reliability metrics | Value truthful, reproducible findings and sound stopping judgment over action or tool counts. |
 
-The key references are `context/README.md`, `context/CLAUDE.md`, `context/AGENTS.md`, `context/docs/architecture.md`, `runtime-flows.md`, `exploit-agent.md`, `outcome-evidence.md`, `safety-model.md`, `skills.md`, `capability-upgrade-design.md`, `reliability-metrics.md`, and `context/tools/exploit_agent/prompt.py`, `phase_tracker.py`, and `outcome_truth.py`.
+The key references reviewed during authoring are `context/README.md`, `context/CLAUDE.md`, `context/AGENTS.md`, `context/docs/architecture.md`, `runtime-flows.md`, `exploit-agent.md`, `outcome-evidence.md`, `safety-model.md`, `skills.md`, `capability-upgrade-design.md`, `reliability-metrics.md`, and `context/tools/exploit_agent/prompt.py`, `phase_tracker.py`, and `outcome_truth.py`. They are provenance, not runtime dependencies; an installed copy of this skill does not need the `context/` folder.
 
 ## What does not transfer
 
