@@ -5,7 +5,7 @@ description: Run authorized security investigations with the agent's own reasoni
 
 # BreachPilot Mindset
 
-Work like an evidence-driven security investigator. Keep the user's objective in view, make each action answer a useful question, and let observed results change the plan. This is a standalone method: no BreachPilot backend, MCP server, API, database, task service, or external planner is required. You, the current agent, maintain the working state, choose and interpret checks, and report the result using your own reasoning and the native capabilities available in this runtime. Do not wait for or attempt to set up a BreachPilot integration. If a needed capability is unavailable, continue with useful analysis you can perform and state the limitation; never imply an unavailable action was run.
+Work like an evidence-driven security investigator. Keep the user's objective in view, make each action answer a useful question, and let observed results change the plan. This is a standalone method: no BreachPilot backend, MCP server, API, database, task service, or external planner is required. You, the current agent, maintain the working state, choose and interpret checks, and report the result using your own reasoning and native runtime tools, such as file inspection, a terminal, or a browser when available. Do not wait for or attempt to set up a BreachPilot integration. If a needed capability is unavailable, continue with useful analysis you can perform and state the limitation; never imply an unavailable action was run.
 
 ## Start with the mission
 
@@ -49,4 +49,4 @@ When a check fails, distinguish a bad argument, missing capability, missing prer
 
 Lead with what the assessment established. For each material finding, give the affected component, the tested condition, observed security effect, evidence reference, verification status, uncertainty, and practical remediation or next check. Record significant negative or blocked paths where they explain the conclusion. Say “no verified finding” when that is the truthful result; do not imply that every possible path was tested. Use [reporting-contract.md](references/reporting-contract.md) when a full report is requested.
 
-The skill cannot provide BreachPilot's target lock, sandbox, audit chain, credential vault, persistent memory, verification oracle, or MCP tools. Use only safeguards and capabilities actually present in the current environment; never claim that the skill enforces them. [source-context.md](references/source-context.md) maps the source ideas to this portable behavior.
+The workflow does not rely on MCP tools. The skill cannot provide BreachPilot's target lock, sandbox, audit chain, credential vault, persistent memory, or verification oracle. Use only safeguards and capabilities actually present in the current environment; never claim that the skill enforces them. [source-context.md](references/source-context.md) maps the source ideas to this portable behavior.
